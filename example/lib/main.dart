@@ -41,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
-          RaisedButton(
+          ElevatedButton(
             child: Text('Get Text'),
             onPressed: () {
               print(key.currentState!.controller!.markupText);
@@ -78,7 +78,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       },
                       {
                         'id': 'asfgasga41',
-                        'display': 'markT',
+                        'display': 'markTwain',
+                        'pasteText': 'markT',
                         'full_name': 'Mark Twain',
                         'photo':
                             'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
@@ -89,6 +90,15 @@ class _MyHomePageState extends State<MyHomePage> {
                         'full_name': 'Jhon Legend',
                         'photo':
                             'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+                      },
+                      {
+                        'id': '1',
+                        'display': 'andrewpiterov',
+                        'display2': 'piter',
+                        'full_name': 'Andrew Piterov',
+                        'pasteText': 'piter',
+                        'photo':
+                            'https://avatars.githubusercontent.com/u/10525569?v=4'
                       },
                     ],
                     matchAll: false,
@@ -108,7 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             Column(
                               children: <Widget>[
                                 Text(data['full_name']),
-                                Text('@${data['display']}'),
+                                Text('@${data['display2']}'),
                               ],
                             )
                           ],

@@ -251,7 +251,7 @@ class FlutterMentionsState extends State<FlutterMentions> {
   LengthMap? _selectedMention;
   String _pattern = '';
 
-  Map<String, Annotation> mapToAnotation() {
+  Map<String, Annotation> _mapToAnnotation() {
     final data = <String, Annotation>{};
 
     // Loop over all the mention items and generate a suggestions matching list
@@ -292,7 +292,7 @@ class FlutterMentionsState extends State<FlutterMentions> {
     return data;
   }
 
-  void addMention(Map<String, dynamic> value, [Mention? list]) {
+  void _addMention(Map<String, dynamic> value, [Mention? list]) {
     final selectedMention = _selectedMention!;
 
     setState(() {
@@ -306,20 +306,26 @@ class FlutterMentionsState extends State<FlutterMentions> {
     controller!.text = controller!.value.text.replaceRange(
       selectedMention.start,
       selectedMention.end,
-      "${_list.trigger}${value['display']}${widget.appendSpaceOnAdd ? ' ' : ''}",
+      "${_list.trigger}${value['pasteText'] ?? value['display']}${widget.appendSpaceOnAdd ? ' ' : ''}",
     );
 
-    if (widget.onMentionAdd != null) widget.onMentionAdd!(value);
+    if (widget.onMentionAdd != null) {
+      widget.onMentionAdd!(value);
+    }
 
     // Move the cursor to next position after the new mentioned item.
-    var nextCursorPosition =
-        selectedMention.start + 1 + value['display']?.length as int? ?? 0;
-    if (widget.appendSpaceOnAdd) nextCursorPosition++;
+    var nextCursorPosition = selectedMention.start +
+            1 +
+            (value['pasteText'] ?? value['display'])?.length as int? ??
+        0;
+    if (widget.appendSpaceOnAdd) {
+      nextCursorPosition++;
+    }
     controller!.selection =
         TextSelection.fromPosition(TextPosition(offset: nextCursorPosition));
   }
 
-  void suggestionListerner() {
+  void _suggestionListener() {
     final cursorPos = controller!.selection.baseOffset;
 
     if (cursorPos >= 0) {
@@ -372,7 +378,7 @@ class FlutterMentionsState extends State<FlutterMentions> {
 
   @override
   void initState() {
-    final data = mapToAnotation();
+    final data = _mapToAnnotation();
 
     controller = AnnotationEditingController(data);
 
@@ -381,7 +387,7 @@ class FlutterMentionsState extends State<FlutterMentions> {
     }
 
     // setup a listener to figure out which suggestions to show based on the trigger
-    controller!.addListener(suggestionListerner);
+    controller!.addListener(_suggestionListener);
 
     controller!.addListener(inputListeners);
 
@@ -390,7 +396,7 @@ class FlutterMentionsState extends State<FlutterMentions> {
 
   @override
   void dispose() {
-    controller!.removeListener(suggestionListerner);
+    controller!.removeListener(_suggestionListener);
     controller!.removeListener(inputListeners);
 
     super.dispose();
@@ -400,7 +406,7 @@ class FlutterMentionsState extends State<FlutterMentions> {
   void didUpdateWidget(widget) {
     super.didUpdateWidget(widget);
 
-    controller!.mapping = mapToAnotation();
+    controller!.mapping = _mapToAnnotation();
   }
 
   @override
@@ -436,7 +442,7 @@ class FlutterMentionsState extends State<FlutterMentions> {
                       return ele == str ? false : ele.contains(str);
                     }).toList(),
                     onTap: (value) {
-                      addMention(value, list);
+                      _addMention(value, list);
                       showSuggestions.value = false;
                     },
                   )
