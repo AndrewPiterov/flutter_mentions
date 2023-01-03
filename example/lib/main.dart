@@ -63,6 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     data: [
                       {
                         'id': '61as61fsa',
+                        'search': 'FayeedPawaskarfayeedP',
                         'display': 'fayeedP',
                         'full_name': 'Fayeed Pawaskar',
                         'photo':
@@ -70,6 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       },
                       {
                         'id': '61asasgasgsag6a',
+                        'search': '61asasgasgsag6aDJKhaled',
                         'display': 'khaled',
                         'full_name': 'DJ Khaled',
                         'style': TextStyle(color: Colors.purple),
@@ -78,6 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       },
                       {
                         'id': 'asfgasga41',
+                        'search': 'markTwainasfgasga41',
                         'display': 'markTwain',
                         'pasteText': 'markT',
                         'full_name': 'Mark Twain',
@@ -86,6 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       },
                       {
                         'id': 'asfsaf451a',
+                        'search': 'asfsaf451aJhonLegend',
                         'display': 'JhonL',
                         'full_name': 'Jhon Legend',
                         'photo':
@@ -93,8 +97,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       },
                       {
                         'id': '1',
-                        'display': 'andrewpiterov',
-                        'display2': 'piter',
+                        'search': 'AndrewPiterovpiter',
+                        'display': 'piter',
                         'full_name': 'Andrew Piterov',
                         'pasteText': 'piter',
                         'photo':
@@ -118,7 +122,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             Column(
                               children: <Widget>[
                                 Text(data['full_name']),
-                                Text('@${data['display2']}'),
+                                Text('@${data['display']}'),
                               ],
                             )
                           ],

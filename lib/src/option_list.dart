@@ -52,6 +52,6 @@ class OptionList extends StatelessWidget {
               },
             ),
           )
-        : Container();
+        : SizedBox.shrink();
   }
 }
